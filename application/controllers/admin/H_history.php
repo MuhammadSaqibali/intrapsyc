@@ -163,6 +163,7 @@ class H_history extends Home_Controller
             'sender_id' => $this->session->userdata('id'),
             'receiver_id' => $patientid,
         );
+        $data['patientid'] = $patientid;
         $data['page_title'] = 'Chat';
         $data['main_content'] = $this->load->view('admin/chatbox', $data, TRUE);
         $this->load->view('admin/index', $data);
@@ -170,10 +171,11 @@ class H_history extends Home_Controller
     function addchat()
     {
         $data = array(
-            'patient_id' => $this->session->userdata('id'),
+            'message' => $this->input->post('text'),
+            'sender_id' => $this->session->userdata('id'),
+            'receiver_id' => $this->input->post('patient'),
         );
         $this->load->model('admin_model');
-        $data = array('message' => $this->input->post('text'));
         $this->admin_model->chatbox($data);
         echo  "success";
     }

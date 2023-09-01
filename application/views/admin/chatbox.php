@@ -56,6 +56,7 @@
             <div class="chat-input mt-3">
                 <div class="input-group">
                     <input type="text" class="form-control" id="input" placeholder="Type your message">
+                    <input type="hidden" value="<?php echo $patientid; ?>" class="form-control" id="patientid" placeholder="Type your message">
                     <div class="input-group-append">
                         <button class="btn btn-primary" id="butsave" type="submit">Send</button>
                     </div>
@@ -70,15 +71,17 @@
                 $(document).ready(function() {
                     $('#butsave').on('click', function() {
                         var input = $('#input').val();
+                        var patientid= $('#patientid').val();
 
                         // Append the user's message to the chat container on the right side
                         appendMessage("my", input);
 
                         $.ajax({
-                            url: '<?php echo base_url("admin/h_history/chatbox"); ?>',
+                            url: '<?php echo base_url("admin/h_history/addchat"); ?>',
                             type: 'POST',
                             data: {
                                 text: input,
+                                patient: patientid,
                                 '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
                             },
                             success: function(botReply) {
