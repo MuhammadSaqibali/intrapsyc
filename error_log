@@ -1,0 +1,2 @@
+[15-Aug-2023 05:22:12 UTC] {"message":"The User ID must match the consultant's","error":"forbidden","status":403,"cause":[]}
+[15-Aug-2023 05:22:12 UTC] {"message":"client.id unauthorized to create preferences","error":"unauthorized_client_id","status":401,"cause":null}
