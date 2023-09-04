@@ -2341,6 +2341,26 @@ class Admin_model extends CI_Model
 
         
       return  $this->db->insert('chatbox', $data);
-      die();
+    }
+    function fetchchat($id,$patient)
+    {
+        $sender_id = $id;
+        $receiver_id =$patient;
+
+        // Check if a row with the same patient_id exists
+        $this->db->where('sender_id', $sender_id)->where('receiver_id', $receiver_id);
+        $this->db->or_where('sender_id', $receiver_id)->where('receiver_id', $sender_id);
+        $query = $this->db->get('chatbox');
+        
+        return $query->result();
+
+        // if ($query->num_rows() > 0) {
+        //     // Update the existing row
+        //     $this->db->where('patient_id', $patient_id);
+        //     $this->db->update('additionalinfo', $data);
+        // } else {
+        //     // Insert a new row
+        //     $this->db->insert('additionalinfo', $data);
+        // }
     }
 }

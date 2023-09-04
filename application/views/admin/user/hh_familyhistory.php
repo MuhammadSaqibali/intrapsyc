@@ -20,9 +20,13 @@
 
   <?php
 
+  $checkbox_values = [];
+
   foreach ($family_info as $info) {
     $checkboxs = $info->checkboxs;
-    $checkbox_values = json_decode($checkboxs, true);
+    if (!empty($checkboxs)) {
+      $checkbox_values = json_decode($checkboxs, true);
+    }
     $d3text = $info->d3text;
     $d3name1 = $info->d3name1;
     $d3name2 = $info->d3name2;

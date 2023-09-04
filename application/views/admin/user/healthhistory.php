@@ -1,8 +1,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <div class="content-wrapper">
   <?php
+  $checkbox_values = [];
   $checkboxs = $patientData->checkboxs;
-  $checkbox_values = json_decode($checkboxs, true);
+  if (!empty($checkboxs)) {
+    $checkbox_values = json_decode($checkboxs, true);
+  }
   ?>
 
   <h1>Patient Health History</h1>
@@ -198,7 +201,7 @@
           <div class="col-md-7">
             <div class="form-group">
               <label for="d2p1">List any specific health problem you are currently experiencing:</label>
-              <input type="text" class="form-control input2" id="d2p1" value="<?php echo $patientData->d2p1; ?>" name="d2p1"readonly>
+              <input type="text" class="form-control input2" id="d2p1" value="<?php echo $patientData->d2p1; ?>" name="d2p1" readonly>
             </div>
           </div>
         </div>
@@ -220,7 +223,7 @@
           <div class="col-md-7">
             <div class="form-group">
               <label for="d2p2">List any specific sleeping problem you are currently experiencing:</label>
-              <input type="text" class="form-control input2" id="d2p2" value="<?php echo $patientData->d2p2; ?>" name="d2p2"readonly>
+              <input type="text" class="form-control input2" id="d2p2" value="<?php echo $patientData->d2p2; ?>" name="d2p2" readonly>
             </div>
           </div>
         </div>
@@ -242,7 +245,7 @@
           <div class="col-md-7">
             <div class="form-group">
               <label for="d2p3">What type of exercise do you participate in?</label>
-              <input type="text" class="form-control input2" value="<?php echo $patientData->d2p3; ?>" id="d2p3" name="d2p3"readonly>
+              <input type="text" class="form-control input2" value="<?php echo $patientData->d2p3; ?>" id="d2p3" name="d2p3" readonly>
             </div>
           </div>
         </div>
@@ -278,7 +281,7 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="d2p4">What kind of drugs?</label>
-              <input type="text" class="form-control input2" value="<?php echo $patientData->d2p4; ?>" id="d2p4" name="d2p4"readonly>
+              <input type="text" class="form-control input2" value="<?php echo $patientData->d2p4; ?>" id="d2p4" name="d2p4" readonly>
             </div>
           </div>
         </div>
@@ -455,7 +458,7 @@
           <div class="col-md-12">
             <div class="form-group">
               <label for="d3text">Briefly describe your family mental health history and the relationships to you.</label>
-              <textarea class="form-control input3" id="d3text" name="d3text"readonly><?php echo $patientData->d3text; ?></textarea>
+              <textarea class="form-control input3" id="d3text" name="d3text" readonly><?php echo $patientData->d3text; ?></textarea>
             </div>
           </div>
 
@@ -489,7 +492,7 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="d3s1">Do they live with you?</label>
-              <select class="form-control input2" id="d3s1" name="d3s1 "disabled>
+              <select class="form-control input2" id="d3s1" name="d3s1 " disabled>
                 <option disabled selected>Please select</option>
                 <option value="Yes" <?php if ($patientData->d3s1 === 'Yes') echo 'selected'; ?>>Yes</option>
                 <option value="No" <?php if ($patientData->d3s1 === 'No') echo 'selected'; ?>>No</option>
@@ -628,7 +631,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="d4therapy2">Therapy Goal#2<sup class="text-danger" style="font-weight: bold; font-size:14px">*</sup> </label>
-              <input type="text" class="form-control input4" id="d4therapy2" value="<?php echo $patientData->d4therapy2; ?>" name="d4therapy2"  readonly required>
+              <input type="text" class="form-control input4" id="d4therapy2" value="<?php echo $patientData->d4therapy2; ?>" name="d4therapy2" readonly required>
             </div>
           </div>
         </div>

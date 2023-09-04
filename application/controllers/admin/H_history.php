@@ -179,4 +179,14 @@ class H_history extends Home_Controller
         $this->admin_model->chatbox($data);
         echo  "success";
     }
+    function fetch_chat(){
+        $this->load->model('admin_model');
+        $patient = $this->input->post('patient');
+        $id =  $this->session->userdata('id');
+        $session=$this->session->userdata('id');
+       
+        $data = $this->admin_model->fetchchat($id,$patient,$session);
+        echo json_encode($data);
+
+    }
 }
