@@ -3,7 +3,7 @@
     <!-- Main content -->
     <section class="content container">
 
-    <h3 class="box-title"><?php echo trans('all-patients') ?> </h3>
+    <h3 class="box-title"><?php echo trans('patient-list') ?> </h3>
 <div class="box-body p-0">
 
                     <div class="col-md-12 col-sm-12 col-xs-12 scroll table-responsive">

@@ -189,4 +189,11 @@ class H_history extends Home_Controller
         echo json_encode($data);
 
     }
+    function dlistchat(){
+        $data = array();
+        $data['page_title'] = 'Chat';
+        $data['appointments'] = $this->admin_model->get_patient_appointments();
+        $data['main_content'] = $this->load->view('admin/appointments/listchat',$data,TRUE);
+        $this->load->view('admin/index',$data);
+    }
 }

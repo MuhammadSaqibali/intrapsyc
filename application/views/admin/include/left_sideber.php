@@ -410,7 +410,7 @@
          <li class="<?php if (isset($page_title) && $page_title == "Chat") {
                           echo "active";
                         } ?>">
-               <a href="<?php echo base_url('admin/H_history/listchat') ?>"><i class="flaticon-prescription-1"></i> <?php echo "Chat" ?></a>
+               <a href="<?php echo base_url('admin/H_history/dlistchat') ?>"><i class="flaticon-prescription-1"></i> <?php echo "Chat" ?></a>
              </li>
        <?php endif; ?>
        <!-- end patient sections -->
