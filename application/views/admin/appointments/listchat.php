@@ -71,7 +71,7 @@
 
 
                                             <td>
-                                                <a target="_blank" href="<?php echo base_url('admin/h_history/chatbox/' . html_escape($amp->user_id)); ?>" class="btn btn-light-primary btn-sm fs-12" data-placement="top" title="Chat"><i class="fa fa-comment"></i> <?php echo trans('chat') ?></a>
+                                                <a target="_blank" href="<?php echo base_url('admin/h_history/chatbox/' . html_escape($amp->user_id) ."/". html_escape($amp->name)); ?>" class="btn btn-light-primary btn-sm fs-12" data-placement="top" title="Chat"><i class="fa fa-comment"></i> <?php echo trans('chat') ?></a>
                                             </td>
 
                                             <td>

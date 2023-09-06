@@ -125,7 +125,7 @@
         <div class="form-row">
           <div class="col-md-4">
             <div class="form-group">
-              <label for="gender">Gender ID<sup class="text-danger" style="font-weight: bold; font-size:14px">*</sup> </label>
+              <label for="gender"><?php echo trans('gender-id') ?><sup class="text-danger" style="font-weight: bold; font-size:14px">*</sup> </label>
               <input type="text" class="form-control input2" id="gender" value="<?php echo $patientData->gender; ?>" name="gender" placeholder="Enter Gender" readonly Required>
             </div>
           </div>

@@ -44,8 +44,11 @@
             <div class="chat-input mt-3">
                 <div class="input-group">
                     <input type="text" class="form-control" id="input" placeholder="Type your message">
-                    <input type="hidden" value="<?php echo $patientid; ?>" class="form-control" id="patientid">
-                    <input type="hidden" value="<?php echo $sender_id; ?>" class="form-control" id="session">
+                    <input type="hidden" value="<?php echo $sender_id; ?>" class="form-control" id="sender_id">
+                    <input type="hidden" value="<?php echo $s_name; ?>" class="form-control" id="s_name">
+                    <input type="hidden" value="<?php echo $receiver_id; ?>" class="form-control" id="receiver_id">
+                    <input type="hidden" value="<?php echo $r_name; ?>" class="form-control" id="r_name">
+                    <input type="hidden" value="<?php echo $chat_id; ?>" class="form-control" id="id">
                     <div class="input-group-append">
                         <button class="btn btn-primary" id="butsave" type="submit">Send</button>
                     </div>
@@ -64,7 +67,10 @@
 
                 $('#butsave').on('click', function() {
                     var input = $('#input').val();
-                    var patientid = $('#patientid').val();
+                    var receiver_id = $('#receiver_id').val();
+                    var s_name = $('#s_name').val();
+                      var r_name = $('#r_name').val();
+                      var chat_id = $('#id').val();
 
                     // Append the user's message to the chat container on the right side
                     $.ajax({
@@ -72,7 +78,10 @@
                         type: 'POST',
                         data: {
                             text: input,
-                            patient: patientid,
+                            patient: receiver_id,
+                            s_name:s_name,
+                            r_name:r_name,
+                            id: chat_id,
                             '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
                         },
                         success: function(botReply) {
@@ -99,14 +108,18 @@
 
             function loaddata() {
                 $("#chat-messages").empty();
-                var session = $('#session').val();
-                var id = $('#patientid').val();
+                var sender_id = $('#sender_id').val();
+                var id = $('#receiver_id').val();
+                var s_name = $('#s_name').val();
+                var r_name = $('#r_name').val();
                 // alert(id);
                 $.ajax({
                     url: '<?php echo base_url("admin/h_history/fetch_chat"); ?>',
                     type: 'POST',
                     data: {
                         patient: id,
+                        s_name:s_name,
+                        r_name:r_name,
                         '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
                     },
                     cache: false,
@@ -117,7 +130,7 @@
 
                         $.each(botReply, function(index, row) {
                             // alert(row.id);
-                            if (session == row.sender_id) {
+                            if (sender_id == row.sender_id & s_name==row.s_name) {
                                 bodyData += "<div class='message user-message'><div class='message-content'>" + row.message + " </div><div class='user-icon'><div class='fa fa-user-o'></div></div></div>";
                             } else {
                                 bodyData += "<div class='message other-message'><div class='other-icon'><div class='fa fa-user-o'></div></div><div class='message-content'>" + row.message + " </div></div>";

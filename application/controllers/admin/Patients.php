@@ -466,8 +466,6 @@ class Patients extends Home_Controller {
         $data = array();
         $this->load->model('admin_model');
         $patientData = $this->admin_model->getHealthHistory($patientid); // Use $patientid here
-        print_r($patientData);
-        die();
         $data['patientData'] = $patientData;
         $data['page_title'] = 'Health History';
         $data['appointments'] = $this->admin_model->get_patient_appointments();

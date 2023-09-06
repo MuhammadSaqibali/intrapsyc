@@ -79,14 +79,26 @@
            </a>
          </li>
 
-         <li class="<?php if (isset($page_title) && $page_title == "Users") {
-                      echo "active";
-                    } ?>">
-           <a href="<?php echo base_url('admin/users') ?>">
-             <i class='bx bx-group'></i> <span class="adminm"><?php echo trans('users') ?></span>
-           </a>
-         </li>
 
+
+         <li class="treeview <?php if (isset($page_title) && $page_title == "Users " || isset($page) && $page == "Users") {
+                                echo "active";
+                              } ?>">
+           <a href="#"><i class='bx bx-group'></i>
+             <span class="adminm"><?php echo trans('users') ?></span>
+             <span class="pull-right-container">
+               <i class="fa fa-angle-right pull-right"></i>
+             </span>
+           </a>
+           <ul class="treeview-menu">
+             <li class="<?php if (isset($page_title) && $page_title == "Users") {
+                      echo "active";
+                    } ?>"><a href="<?php echo base_url('admin/users') ?>"><i class='bx bx-right-arrow-alt'></i><?php echo trans('experts') ?></a></li>
+             <li class="<?php if (isset($page_title) && $page_title == "Chat Control") {
+                      echo "active";
+                    } ?>"><a href="<?php echo base_url('admin/chat_control') ?>"><i class='bx bx-right-arrow-alt'></i><?php echo trans('chat-control') ?></a></li>
+           </ul>
+         </li>
          <li class="treeview <?php if (isset($page_title) && $page_title == "Blog " || isset($page) && $page == "Blog") {
                                 echo "active";
                               } ?>">
@@ -408,10 +420,10 @@
            <a href="<?php echo base_url('admin/H_history') ?>"><i class="flaticon-prescription-1"></i> <?php echo "Health History" ?></a>
          </li>
          <li class="<?php if (isset($page_title) && $page_title == "Chat") {
-                          echo "active";
-                        } ?>">
-               <a href="<?php echo base_url('admin/H_history/dlistchat') ?>"><i class="flaticon-prescription-1"></i> <?php echo "Chat" ?></a>
-             </li>
+                      echo "active";
+                    } ?>">
+           <a href="<?php echo base_url('admin/H_history/dlistchat') ?>"><i class="flaticon-prescription-1"></i> <?php echo "Chat" ?></a>
+         </li>
        <?php endif; ?>
        <!-- end patient sections -->
 

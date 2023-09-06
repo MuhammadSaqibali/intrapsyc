@@ -155,25 +155,40 @@ class H_history extends Home_Controller
         $data['main_content'] = $this->load->view('admin/listchat', $data, TRUE);
         $this->load->view('admin/index', $data);
     }
-    function chatbox($patientid)
+    function chatbox($patientid,$name)
     {
         $this->load->model('admin_model');
         $data = array(
-            'message' => $this->input->post('text'),
             'sender_id' => $this->session->userdata('id'),
+            's_name' => $this->session->userdata('name'),
             'receiver_id' => $patientid,
+            'r_name' => $name,
         );
-        $data['patientid'] = $patientid;
+        
+        $chat_id = $this->admin_model->storechat($data);
+
+        if ($chat_id == 0) {
+            // If chat_id is 0, it means the record wasn't inserted.
+            // Try to fetch the chat ID based on sender, receiver, and names.
+            $chat_id = $this->admin_model->fetch_chatid($data);
+        }
+    
+        $data['chat_id'] = $chat_id;
         $data['page_title'] = 'Chat';
         $data['main_content'] = $this->load->view('admin/chatbox', $data, TRUE);
         $this->load->view('admin/index', $data);
     }
     function addchat()
     {
+        $timestamp = date('Y-m-d H:i:s'); // Current timestamp
         $data = array(
             'message' => $this->input->post('text'),
+            's_name' => $this->input->post('s_name'),
+            'r_name' => $this->input->post('r_name'),
             'sender_id' => $this->session->userdata('id'),
             'receiver_id' => $this->input->post('patient'),
+            'timestamp' => $timestamp,
+            'chat_id'=>$this->input->post('id')
         );
         $this->load->model('admin_model');
         $this->admin_model->chatbox($data);
@@ -182,10 +197,10 @@ class H_history extends Home_Controller
     function fetch_chat(){
         $this->load->model('admin_model');
         $patient = $this->input->post('patient');
+        $s_name = $this->input->post('s_name');
+        $r_name = $this->input->post('r_name');
         $id =  $this->session->userdata('id');
-        $session=$this->session->userdata('id');
-       
-        $data = $this->admin_model->fetchchat($id,$patient,$session);
+        $data = $this->admin_model->fetchchat($id,$patient,$s_name,$r_name);
         echo json_encode($data);
 
     }

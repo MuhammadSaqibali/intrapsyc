@@ -2340,27 +2340,56 @@ class Admin_model extends CI_Model
         // $this->db->where('patient_id', $patient_id);
 
         
-      return  $this->db->insert('chatbox', $data);
+      return  $this->db->insert('chat_message', $data);
     }
     function fetchchat($id,$patient)
     {
         $sender_id = $id;
         $receiver_id =$patient;
-
         // Check if a row with the same patient_id exists
         $this->db->where('sender_id', $sender_id)->where('receiver_id', $receiver_id);
         $this->db->or_where('sender_id', $receiver_id)->where('receiver_id', $sender_id);
-        $query = $this->db->get('chatbox');
+        $query = $this->db->get('chat_message');
         
         return $query->result();
-
-        // if ($query->num_rows() > 0) {
-        //     // Update the existing row
-        //     $this->db->where('patient_id', $patient_id);
-        //     $this->db->update('additionalinfo', $data);
-        // } else {
-        //     // Insert a new row
-        //     $this->db->insert('additionalinfo', $data);
-        // }
     }
+    function storechat($data){
+        $sender_id = $data['sender_id'];
+        $receiver_id =$data['receiver_id'];
+        $s_name =$data['s_name'];
+        $r_name =$data['r_name'];
+        // Check if a row with the same patient_id exists
+        $this->db->where('sender_id', $sender_id)->where('receiver_id', $receiver_id)->where('s_name', $s_name)->where('r_name', $r_name);
+        $this->db->or_where('sender_id', $receiver_id)->where('receiver_id', $sender_id)->where('s_name', $r_name)->where('r_name', $s_name);
+        $query = $this->db->get('created_chat');
+        
+        if ($query->num_rows() > 0) {
+        } else {
+            // The condition does not exist, run the insert query
+           $this->db->insert('created_chat', $data);
+        }
+    }
+    function fetch_chatid($data)
+{
+    $sender_id = $data['sender_id'];
+    $receiver_id = $data['receiver_id'];
+    $this->db->select('id');
+    $this->db->where('sender_id', $sender_id);
+    $this->db->where('receiver_id', $receiver_id);
+    $this->db->or_where('sender_id', $receiver_id);
+    $this->db->where('receiver_id', $sender_id);
+    $this->db->from('created_chat');
+
+    $query = $this->db->get();
+
+    if ($query->num_rows() > 0) {
+        // Record found, return the chat ID
+        $result = $query->row();
+        return $result->id;
+    }
+
+    // No record found, return 0 or any suitable default value
+    return 0;
+}
+
 }

@@ -34,7 +34,7 @@
                                         <td><?php echo character_limiter($patients->present_address); ?></td>
 
                                         <td>
-                                            <a target="_blank" href="<?php echo base_url('admin/h_history/chatbox/' . html_escape($patients->id)); ?>" class="btn btn-light-primary btn-sm fs-12" data-placement="top" title="Chat"><i class="fa fa-comment"></i> <?php echo trans('chat') ?></a>
+                                            <a target="_blank" href="<?php echo base_url('admin/h_history/chatbox/' . html_escape($patients->id)."/". html_escape($patients->name)); ?>" class="btn btn-light-primary btn-sm fs-12" data-placement="top" title="Chat"><i class="fa fa-comment"></i> <?php echo trans('chat') ?></a>
                                         </td>
                                     </tr>
 
