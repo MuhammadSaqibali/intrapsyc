@@ -39,6 +39,7 @@ class Users extends Home_Controller {
         }
 
         $data['page_title'] = 'Users';
+        $data['page'] = 'Users';
         $data['packages'] = $this->admin_model->select('package');
         $data['countries'] = $this->admin_model->select_asc('country');
         $data['users'] = $this->admin_model->get_all_users(0 , $config['per_page'], $page * $config['per_page'], $type);

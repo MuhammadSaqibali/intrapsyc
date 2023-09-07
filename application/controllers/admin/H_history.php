@@ -165,14 +165,15 @@ class H_history extends Home_Controller
             'r_name' => $name,
         );
         
-        $chat_id = $this->admin_model->storechat($data);
-
+        $chat_id = $this->admin_model->fetch_chatid($data);
+        
         if ($chat_id == 0) {
             // If chat_id is 0, it means the record wasn't inserted.
+            $this->admin_model->storechat($data);
             // Try to fetch the chat ID based on sender, receiver, and names.
-            $chat_id = $this->admin_model->fetch_chatid($data);
+            $chat_id = $this->db->insert_id();
         }
-    
+        $data['status']=$this->admin_model->get_chat_status($chat_id);
         $data['chat_id'] = $chat_id;
         $data['page_title'] = 'Chat';
         $data['main_content'] = $this->load->view('admin/chatbox', $data, TRUE);

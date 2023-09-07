@@ -91,12 +91,8 @@
              </span>
            </a>
            <ul class="treeview-menu">
-             <li class="<?php if (isset($page_title) && $page_title == "Users") {
-                      echo "active";
-                    } ?>"><a href="<?php echo base_url('admin/users') ?>"><i class='bx bx-right-arrow-alt'></i><?php echo trans('experts') ?></a></li>
-             <li class="<?php if (isset($page_title) && $page_title == "Chat Control") {
-                      echo "active";
-                    } ?>"><a href="<?php echo base_url('admin/chat_control') ?>"><i class='bx bx-right-arrow-alt'></i><?php echo trans('chat-control') ?></a></li>
+             <li><a href="<?php echo base_url('admin/users') ?>"><i class='bx bx-right-arrow-alt'></i><?php echo trans('experts') ?></a></li>
+             <li><a href="<?php echo base_url('admin/chat_control') ?>"><i class='bx bx-right-arrow-alt'></i><?php echo trans('chat-control') ?></a></li>
            </ul>
          </li>
          <li class="treeview <?php if (isset($page_title) && $page_title == "Blog " || isset($page) && $page == "Blog") {

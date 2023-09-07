@@ -2,8 +2,7 @@
 
     <!-- Main content -->
     <section class="content container">
-
-        <style>
+     <style>
             /* Custom styles for the chat */
             .message {
                 display: flex;
@@ -34,6 +33,8 @@
         </style>
 
         <div class="container mt-5">
+            <?php if($status=='active'){
+          ?>
             <!-- Chat messages container -->
             <div id="contentContainer" class="message-container overflow-auto" style="max-height: 450px;">
                 <div id="chat-messages"></div>
@@ -55,7 +56,11 @@
                 </div>
             </div>
         </div>
-
+<?php }else{?>
+    <div class="text-center text-danger my-auto">
+        <h3>The admin have blocked your chat</h3>
+    </div>
+    <?php }?>
         <script>
         </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -146,5 +151,6 @@
         <script type="text/javascript">
             // setInterval(loaddata, 3000);
         </script>
-    </section>
+
+</section>
 </div>

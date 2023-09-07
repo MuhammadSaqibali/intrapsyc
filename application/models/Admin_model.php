@@ -2353,22 +2353,21 @@ class Admin_model extends CI_Model
         
         return $query->result();
     }
-    function storechat($data){
-        $sender_id = $data['sender_id'];
-        $receiver_id =$data['receiver_id'];
-        $s_name =$data['s_name'];
-        $r_name =$data['r_name'];
-        // Check if a row with the same patient_id exists
-        $this->db->where('sender_id', $sender_id)->where('receiver_id', $receiver_id)->where('s_name', $s_name)->where('r_name', $r_name);
-        $this->db->or_where('sender_id', $receiver_id)->where('receiver_id', $sender_id)->where('s_name', $r_name)->where('r_name', $s_name);
-        $query = $this->db->get('created_chat');
-        
-        if ($query->num_rows() > 0) {
-        } else {
-            // The condition does not exist, run the insert query
-           $this->db->insert('created_chat', $data);
-        }
+    function storechat($data) {
+        // Fetch user data for the sender
+        $user = $this->db->where('id', $data['sender_id'])->get('users')->row();
+    
+        // Check if the user is a doctor or patient based on the conditions
+        $data['type'] = 'patient';
+        if ($user) {
+            if ($user->name == $data['s_name']) {
+                $data['type'] = 'doctor';
+            }}
+    
+        // Insert the data into the created_chat table
+        $this->db->insert('created_chat', $data);
     }
+    
     function fetch_chatid($data)
 {
     $sender_id = $data['sender_id'];
@@ -2391,5 +2390,26 @@ class Admin_model extends CI_Model
     // No record found, return 0 or any suitable default value
     return 0;
 }
+public function get_chat_status($chat_id) {
+    $this->db->select('status');
+    $this->db->where('id', $chat_id);
+    $query = $this->db->get('created_chat');
+
+    if ($query->num_rows() > 0) {
+        $result = $query->row();
+        return $result->status;
+    } else {
+        return false; // Chat entry not found
+    }
+}
+public function update_chat_status($chat_id, $new_status) {
+    $data = array(
+        'status' => $new_status,
+    );
+
+    $this->db->where('id', $chat_id);
+    $this->db->update('created_chat', $data);
+}
+
 
 }
